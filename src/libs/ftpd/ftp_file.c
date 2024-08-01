@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <assert.h>
 
-#include <nxdk/mount.h>
+#include "dash_mount.h"
 
 #ifndef INVALID_HANDLE_VALUE
 #define INVALID_HANDLE_VALUE ((HANDLE) (LONG_PTR)-1)
@@ -217,7 +217,7 @@ FRESULT ftps_f_readdir(DIR *dp, FILINFO *nfo)
 
 		for(; root_index < (sizeof(root_drives) / sizeof(root_drives[0])); root_index++)
 		{
-			if(!nxIsDriveMounted(root_drives[root_index][1]))
+			if(!dashIsDriveMounted(root_drives[root_index][1]))
 				continue;
 
 			nfo->fname[0] = root_drives[root_index][1];

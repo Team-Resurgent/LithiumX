@@ -1,7 +1,6 @@
 //make -f Makefile.nxdk -j && /d/Games/Emulators/xemu/xemu.exe -device lpc47m157 -serial stdio
 #include <xboxkrnl/xboxkrnl.h>
 #include <nxdk/format.h>
-#include <nxdk/mount.h>
 #include <nxdk/path.h>
 #include <nxdk/net.h>
 #include <hal/video.h>
@@ -129,59 +128,59 @@ void platform_init(int *w, int *h)
     debugPrint("%s ", loading_str);
 
     // nxdk automounts D to the root xbe path. Lets undo that
-    if (nxIsDriveMounted("DVD-ROM"))
+    if (dashIsDriveMounted("DVD-ROM"))
     {
-        nxUnmountDrive("DVD-ROM");
+        dashUnmountDrive("DVD-ROM");
     }
 
     // Mount the DVD drive
-    nxMountDrive("DVD-ROM", "\\Device\\CdRom0");
+    dashMountDrive("DVD-ROM", "\\Device\\CdRom0");
 
     // Mount root of LithiumX xbe to Q:
     char targetPath[MAX_PATH];
     nxGetCurrentXbeNtPath(targetPath);
     *(strrchr(targetPath, '\\') + 1) = '\0';
-    nxMountDrive("ROOT", targetPath);
+    dashMountDrive("ROOT", targetPath);
     debugPrint(".");
 
     // Mount stock partitions
-    nxMountDrive("HDD0-C", "\\Device\\Harddisk0\\Partition2\\");
-    nxMountDrive("HDD0-E", "\\Device\\Harddisk0\\Partition1\\");
-    nxMountDrive("HDD0-X", "\\Device\\Harddisk0\\Partition3\\");
-    nxMountDrive("HDD0-Y", "\\Device\\Harddisk0\\Partition4\\");
-    nxMountDrive("HDD0-Z", "\\Device\\Harddisk0\\Partition5\\");
+    dashMountDrive("HDD0-C", "\\Device\\Harddisk0\\Partition2\\");
+    dashMountDrive("HDD0-E", "\\Device\\Harddisk0\\Partition1\\");
+    dashMountDrive("HDD0-X", "\\Device\\Harddisk0\\Partition3\\");
+    dashMountDrive("HDD0-Y", "\\Device\\Harddisk0\\Partition4\\");
+    dashMountDrive("HDD0-Z", "\\Device\\Harddisk0\\Partition5\\");
     debugPrint(".");
 
     // Mount extended partitions
     // NOTE: Both the retail kernel and modified kernels will mount these partitions
     // if they exist and silently fail if they don't. So we can just try to mount them
     // and not worry about checking if they exist.
-    nxMountDrive("HDD0-F", "\\Device\\Harddisk0\\Partition6\\");
-    nxMountDrive("HDD0-G", "\\Device\\Harddisk0\\Partition7\\");
-    nxMountDrive("HDD0-R", "\\Device\\Harddisk0\\Partition8\\");
-    nxMountDrive("HDD0-S", "\\Device\\Harddisk0\\Partition9\\");
-    nxMountDrive("HDD0-V", "\\Device\\Harddisk0\\Partition10\\");
-    nxMountDrive("HDD0-W", "\\Device\\Harddisk0\\Partition11\\");
-    nxMountDrive("HDD0-A", "\\Device\\Harddisk0\\Partition12\\");
-    nxMountDrive("HDD0-B", "\\Device\\Harddisk0\\Partition13\\");
-    nxMountDrive("HDD0-P", "\\Device\\Harddisk0\\Partition14\\");
+    dashMountDrive("HDD0-F", "\\Device\\Harddisk0\\Partition6\\");
+    dashMountDrive("HDD0-G", "\\Device\\Harddisk0\\Partition7\\");
+    dashMountDrive("HDD0-R", "\\Device\\Harddisk0\\Partition8\\");
+    dashMountDrive("HDD0-S", "\\Device\\Harddisk0\\Partition9\\");
+    dashMountDrive("HDD0-V", "\\Device\\Harddisk0\\Partition10\\");
+    dashMountDrive("HDD0-W", "\\Device\\Harddisk0\\Partition11\\");
+    dashMountDrive("HDD0-A", "\\Device\\Harddisk0\\Partition12\\");
+    dashMountDrive("HDD0-B", "\\Device\\Harddisk0\\Partition13\\");
+    dashMountDrive("HDD0-P", "\\Device\\Harddisk0\\Partition14\\");
 
     // Mount any second drive partitions
 
-    nxMountDrive("HDD1-C", "\\Device\\Harddisk1\\Partition2\\");
-    nxMountDrive("HDD1-E", "\\Device\\Harddisk1\\Partition1\\");
-    nxMountDrive("HDD1-X", "\\Device\\Harddisk1\\Partition3\\");
-    nxMountDrive("HDD1-Y", "\\Device\\Harddisk1\\Partition4\\");
-    nxMountDrive("HDD1-Z", "\\Device\\Harddisk1\\Partition5\\");
-    nxMountDrive("HDD1-F", "\\Device\\Harddisk1\\Partition6\\");
-    nxMountDrive("HDD1-G", "\\Device\\Harddisk1\\Partition7\\");
-    nxMountDrive("HDD1-R", "\\Device\\Harddisk1\\Partition8\\");
-    nxMountDrive("HDD1-S", "\\Device\\Harddisk1\\Partition9\\");
-    nxMountDrive("HDD1-V", "\\Device\\Harddisk1\\Partition10\\");
-    nxMountDrive("HDD1-W", "\\Device\\Harddisk1\\Partition11\\");
-    nxMountDrive("HDD1-A", "\\Device\\Harddisk1\\Partition12\\");
-    nxMountDrive("HDD1-B", "\\Device\\Harddisk1\\Partition13\\");
-    nxMountDrive("HDD1-P", "\\Device\\Harddisk1\\Partition14\\");
+    dashMountDrive("HDD1-C", "\\Device\\Harddisk1\\Partition2\\");
+    dashMountDrive("HDD1-E", "\\Device\\Harddisk1\\Partition1\\");
+    dashMountDrive("HDD1-X", "\\Device\\Harddisk1\\Partition3\\");
+    dashMountDrive("HDD1-Y", "\\Device\\Harddisk1\\Partition4\\");
+    dashMountDrive("HDD1-Z", "\\Device\\Harddisk1\\Partition5\\");
+    dashMountDrive("HDD1-F", "\\Device\\Harddisk1\\Partition6\\");
+    dashMountDrive("HDD1-G", "\\Device\\Harddisk1\\Partition7\\");
+    dashMountDrive("HDD1-R", "\\Device\\Harddisk1\\Partition8\\");
+    dashMountDrive("HDD1-S", "\\Device\\Harddisk1\\Partition9\\");
+    dashMountDrive("HDD1-V", "\\Device\\Harddisk1\\Partition10\\");
+    dashMountDrive("HDD1-W", "\\Device\\Harddisk1\\Partition11\\");
+    dashMountDrive("HDD1-A", "\\Device\\Harddisk1\\Partition12\\");
+    dashMountDrive("HDD1-B", "\\Device\\Harddisk1\\Partition13\\");
+    dashMountDrive("HDD1-P", "\\Device\\Harddisk1\\Partition14\\");
 
     debugPrint(".");
 
