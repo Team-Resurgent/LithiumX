@@ -187,8 +187,10 @@ static void list_dir(const char *path, list_item_t *list, int *cnt)
     //Xbox doesn't have a root drive that shows all partitions so we fake it
     if (strcmp(path, DASH_ROOT_PATH) == 0)
     {
-        static const char root_drives[][3] = {"C:", "D:", "E:", "F:", "G:", "R:", "S:",
-                                              "V:", "W:", "A:", "B:", "P:", "Q:", "X:", "Y:", "Z:", };
+        static const char root_drives[][7] = {"HDD0-C:", "DVD-ROM:", "HDD0-E:", "HDD0-F:", "HDD0-G:", "HDD0-R:", "HDD0-S:",
+                                              "HDD0-V:", "HDD0-W:", "HDD0-A:", "HDD0-B:", "HDD0-P:", "HDD0-Q:", "HDD0-X:", "HDD0-Y:", "HDD0-Z:", 
+                                              "HDD1-C:", "HDD1-E:", "HDD1-F:", "HDD1-G:", "HDD1-R:", "HDD1-S:",
+                                              "HDD1-V:", "HDD1-W:", "HDD1-A:", "HDD1-B:", "HDD1-P:", "HDD1-Q:", "HDD1-X:", "HDD1-Y:", "HDD1-Z:", };
         int _cnt = 0;
         for (int i = 0; i < DASH_ARRAY_SIZE(root_drives); i++)
         {

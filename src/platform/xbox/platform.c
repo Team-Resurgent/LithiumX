@@ -129,47 +129,65 @@ void platform_init(int *w, int *h)
     debugPrint("%s ", loading_str);
 
     // nxdk automounts D to the root xbe path. Lets undo that
-    if (nxIsDriveMounted('D'))
+    if (nxIsDriveMounted("DVD-ROM"))
     {
-        nxUnmountDrive('D');
+        nxUnmountDrive("DVD-ROM");
     }
 
     // Mount the DVD drive
-    nxMountDrive('D', "\\Device\\CdRom0");
+    nxMountDrive("DVD-ROM", "\\Device\\CdRom0");
 
     // Mount root of LithiumX xbe to Q:
     char targetPath[MAX_PATH];
     nxGetCurrentXbeNtPath(targetPath);
     *(strrchr(targetPath, '\\') + 1) = '\0';
-    nxMountDrive('Q', targetPath);
+    nxMountDrive("ROOT", targetPath);
     debugPrint(".");
 
     // Mount stock partitions
-    nxMountDrive('C', "\\Device\\Harddisk0\\Partition2\\");
-    nxMountDrive('E', "\\Device\\Harddisk0\\Partition1\\");
-    nxMountDrive('X', "\\Device\\Harddisk0\\Partition3\\");
-    nxMountDrive('Y', "\\Device\\Harddisk0\\Partition4\\");
-    nxMountDrive('Z', "\\Device\\Harddisk0\\Partition5\\");
+    nxMountDrive("HDD0-C", "\\Device\\Harddisk0\\Partition2\\");
+    nxMountDrive("HDD0-E", "\\Device\\Harddisk0\\Partition1\\");
+    nxMountDrive("HDD0-X", "\\Device\\Harddisk0\\Partition3\\");
+    nxMountDrive("HDD0-Y", "\\Device\\Harddisk0\\Partition4\\");
+    nxMountDrive("HDD0-Z", "\\Device\\Harddisk0\\Partition5\\");
     debugPrint(".");
 
     // Mount extended partitions
     // NOTE: Both the retail kernel and modified kernels will mount these partitions
     // if they exist and silently fail if they don't. So we can just try to mount them
     // and not worry about checking if they exist.
-    nxMountDrive('F', "\\Device\\Harddisk0\\Partition6\\");
-    nxMountDrive('G', "\\Device\\Harddisk0\\Partition7\\");
-    nxMountDrive('R', "\\Device\\Harddisk0\\Partition8\\");
-    nxMountDrive('S', "\\Device\\Harddisk0\\Partition9\\");
-    nxMountDrive('V', "\\Device\\Harddisk0\\Partition10\\");
-    nxMountDrive('W', "\\Device\\Harddisk0\\Partition11\\");
-    nxMountDrive('A', "\\Device\\Harddisk0\\Partition12\\");
-    nxMountDrive('B', "\\Device\\Harddisk0\\Partition13\\");
-    nxMountDrive('P', "\\Device\\Harddisk0\\Partition14\\");
+    nxMountDrive("HDD0-F", "\\Device\\Harddisk0\\Partition6\\");
+    nxMountDrive("HDD0-G", "\\Device\\Harddisk0\\Partition7\\");
+    nxMountDrive("HDD0-R", "\\Device\\Harddisk0\\Partition8\\");
+    nxMountDrive("HDD0-S", "\\Device\\Harddisk0\\Partition9\\");
+    nxMountDrive("HDD0-V", "\\Device\\Harddisk0\\Partition10\\");
+    nxMountDrive("HDD0-W", "\\Device\\Harddisk0\\Partition11\\");
+    nxMountDrive("HDD0-A", "\\Device\\Harddisk0\\Partition12\\");
+    nxMountDrive("HDD0-B", "\\Device\\Harddisk0\\Partition13\\");
+    nxMountDrive("HDD0-P", "\\Device\\Harddisk0\\Partition14\\");
+
+    // Mount any second drive partitions
+
+    nxMountDrive("HDD1-C", "\\Device\\Harddisk1\\Partition2\\");
+    nxMountDrive("HDD1-E", "\\Device\\Harddisk1\\Partition1\\");
+    nxMountDrive("HDD1-X", "\\Device\\Harddisk1\\Partition3\\");
+    nxMountDrive("HDD1-Y", "\\Device\\Harddisk1\\Partition4\\");
+    nxMountDrive("HDD1-Z", "\\Device\\Harddisk1\\Partition5\\");
+    nxMountDrive("HDD1-F", "\\Device\\Harddisk1\\Partition6\\");
+    nxMountDrive("HDD1-G", "\\Device\\Harddisk1\\Partition7\\");
+    nxMountDrive("HDD1-R", "\\Device\\Harddisk1\\Partition8\\");
+    nxMountDrive("HDD1-S", "\\Device\\Harddisk1\\Partition9\\");
+    nxMountDrive("HDD1-V", "\\Device\\Harddisk1\\Partition10\\");
+    nxMountDrive("HDD1-W", "\\Device\\Harddisk1\\Partition11\\");
+    nxMountDrive("HDD1-A", "\\Device\\Harddisk1\\Partition12\\");
+    nxMountDrive("HDD1-B", "\\Device\\Harddisk1\\Partition13\\");
+    nxMountDrive("HDD1-P", "\\Device\\Harddisk1\\Partition14\\");
+
     debugPrint(".");
 
-    CreateDirectoryA("E:\\UDATA", NULL);
-    CreateDirectoryA("E:\\UDATA\\LithiumX", NULL);
-    FILE *fp = fopen("E:\\UDATA\\LithiumX\\TitleMeta.xbx", "wb");
+    CreateDirectoryA("HDD0-E:\\UDATA", NULL);
+    CreateDirectoryA("HDD0-E:\\UDATA\\LithiumX", NULL);
+    FILE *fp = fopen("HDD0-E:\\UDATA\\LithiumX\\TitleMeta.xbx", "wb");
     if (fp)
     {
         fprintf(fp, "TitleName=LithiumX Dashboard\r\n");
