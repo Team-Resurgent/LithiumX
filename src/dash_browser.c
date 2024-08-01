@@ -194,7 +194,7 @@ static void list_dir(const char *path, list_item_t *list, int *cnt)
         int _cnt = 0;
         for (int i = 0; i < DASH_ARRAY_SIZE(root_drives); i++)
         {
-            if(!dashIsDriveMounted(root_drives[i][0]))
+            if(!dashIsDriveMounted(root_drives[i]))
             {
                 dash_printf(LEVEL_TRACE, "%s not mounted. Skipping\n", root_drives[i]);
                 continue;
