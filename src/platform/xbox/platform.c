@@ -136,7 +136,7 @@ void platform_init(int *w, int *h)
     // Mount the DVD drive
     dashMountDrive("DVD-ROM", "\\Device\\CdRom0");
 
-    // Mount root of LithiumX xbe to Q:
+    // Mount root of LithiumX xbe to ROOT:
     char targetPath[MAX_PATH];
     nxGetCurrentXbeNtPath(targetPath);
     *(strrchr(targetPath, '\\') + 1) = '\0';
